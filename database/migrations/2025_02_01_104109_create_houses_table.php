@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->string('thumbnail');
             $table->text('about');
             $table->foreignId('city_id')->constrained()->onDelete('cascade');
-            $table->boolean('is_available')->default(true);
-            $table->boolean('is_fully_booked')->default(false);
+            $table->boolean('is_available');
+            $table->boolean('is_fully_booked');
             $table->unsignedInteger('price');
             $table->unsignedInteger('duration');
             $table->string('address');
