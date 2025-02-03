@@ -5,19 +5,27 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-    public function up() {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('photo');
+            $table->boolean('boolean')->default(false); // Menambahkan kolom boolean dengan nilai default false
             $table->softDeletes();
             $table->timestamps();
         });
     }
 
-    public function down() {
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
         Schema::dropIfExists('cities');
     }
 };
-

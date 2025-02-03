@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class CityResource extends Resource
 {
@@ -28,9 +29,19 @@ class CityResource extends Resource
                     ->helperText('Masukan nama kota')
                     ->label('Name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (string $state, Forms\Set $set) {
+                        $set('slug', Str::slug($state));
+                    }),
 
-                    Forms\Components\FileUpload::make('photo')
+                Forms\Components\TextInput::make('slug')
+                    ->disabled()
+                    ->dehydrated()
+                    ->required()
+                    ->unique(City::class, 'slug', ignoreRecord: true),
+
+                Forms\Components\FileUpload::make('photo')
                     ->label('Photo')
                     ->image()
                     ->directory('uploads/photos')
@@ -44,6 +55,10 @@ class CityResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('name')
+                ->searchable(),
+
+                Tables\Columns\ImageColumn::make('photo'),
             ])
             ->filters([
                 //
