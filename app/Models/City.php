@@ -29,21 +29,6 @@ class City extends Model
     ];
 
     /**
-     * Boot method untuk model.
-     * Mengatur pembuatan slug otomatis saat model dibuat.
-     */
-    protected static function boot()
-    {
-        parent::boot();
-        
-        static::creating(function ($city) {
-            if (empty($city->slug)) {
-                $city->slug = Str::slug($city->name);
-            }
-        });
-    }
-
-    /**
      * Relasi ke model House (Satu kota bisa memiliki banyak rumah).
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -55,24 +40,14 @@ class City extends Model
 
     /**
      * Mutator untuk kolom 'name'.
-     * Mengubah nilai 'name' menjadi huruf kapital di awal setiap kata.
+     * Mengubah nilai 'name' menjadi huruf kapital di awal setiap kata dan menghasilkan 'slug'.
      *
      * @param string $value
      */
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = ucwords(strtolower($value));
-    }
-
-    /**
-     * Mutator untuk kolom 'slug'.
-     * Menggunakan Str::slug untuk pembuatan slug yang lebih aman.
-     *
-     * @param string $value
-     */
-    public function setSlugAttribute($value)
-    {
-        $this->attributes['slug'] = Str::slug($value);
+        $this->attributes['name'] = ucwords(strtolower($value)); // Format nama
+        $this->attributes['slug'] = Str::slug($value); // Generate slug dari nama
     }
 
     /**
