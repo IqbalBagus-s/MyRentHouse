@@ -74,6 +74,27 @@ class BookingTransactionResource extends Resource
         return $table
             ->columns([
                 //
+                Tables\Columns\TextColumn::make('booking_trx')
+                ->searchable(),
+                
+                Tables\Columns\TextColumn::make('name')
+                ->searchable(),
+                
+                Tables\Columns\TextColumn::make('house.name'),
+                
+                Tables\Columns\TextColumn::make('started_at')
+                ->date(),
+                
+                Tables\Columns\TextColumn::make('ended_at')
+                ->date(),
+
+                Tables\Columns\IconColumn::make('is_paid')
+                ->boolean()
+                ->trueColor('succes')
+                ->falseColor('danger')
+                ->trueIcon('heroicon-o-check-circle')
+                ->falseIcon('heroicon-o-x-circle')
+                ->label('Is Paid ?'),
             ])
             ->filters([
                 //
