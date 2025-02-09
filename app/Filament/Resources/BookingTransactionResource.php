@@ -38,11 +38,13 @@ class BookingTransactionResource extends Resource
 
                 Forms\Components\TextInput::make('total_amount')
                 ->numeric()
+                ->minValue(0)
                 ->prefix('IDR')
                 ->required(),
 
                 Forms\Components\TextInput::make('duration')
                 ->numeric()
+                ->minValue(0)
                 ->prefix('Days')
                 ->required(),
 
