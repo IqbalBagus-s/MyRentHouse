@@ -51,7 +51,13 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-6. Storage Link
+5. Migrasi Database
+Setelah mengatur database, jalankan migrasi agar tabel terbuat di database:
+```
+php artisan migrate
+```
+
+7. Storage Link
 Jika aplikasi menggunakan fitur upload file, jalankan:
 ```
 php artisan storage:link
