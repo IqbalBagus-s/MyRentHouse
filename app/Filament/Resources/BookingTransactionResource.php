@@ -24,6 +24,46 @@ class BookingTransactionResource extends Resource
         return $form
             ->schema([
                 //
+                Forms\Components\TextInput::make('name')
+                ->maxLength(255)
+                ->required(),
+                
+                Forms\Components\TextInput::make('booking_trx')
+                ->maxLength(255)
+                ->required(),
+                
+                Forms\Components\TextInput::make('phone_number')
+                ->maxLength(255)
+                ->required(),
+
+                Forms\Components\TextInput::make('total_amount')
+                ->numeric()
+                ->prefix('IDR')
+                ->required(),
+
+                Forms\Components\TextInput::make('duration')
+                ->numeric()
+                ->prefix('Days')
+                ->required(),
+
+                Forms\Components\DatePicker::make('started_at')
+                ->required(),
+
+                Forms\Components\DatePicker::make('ended_at')
+                ->required(),
+                
+                Forms\Components\Select::make('is_paid')
+                ->options([
+                    true => 'Paid',
+                    false => 'Not Paid'
+                ])
+                ->required(),
+                    
+                Forms\Components\Select::make('house_id')
+                ->relationship('house', 'name')
+                ->searchable()
+                ->preload()
+                ->required(),
             ]);
     }
 

@@ -26,26 +26,27 @@ class CityResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->helperText('Masukan nama kota')
-                    ->label('Name')
-                    ->required()
-                    ->maxLength(255)
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(function (string $state, Forms\Set $set) {
-                        $set('slug', Str::slug($state));
-                    }),
+                ->helperText('Masukan nama kota')
+                ->label('Name')
+                ->required()
+                ->maxLength(255)
+                ->live(onBlur: true)
+                ->afterStateUpdated(function (string $state, Forms\Set $set) 
+                {
+                    $set('slug', Str::slug($state));
+                }),
 
                 Forms\Components\TextInput::make('slug')
-                    ->disabled()
-                    ->dehydrated()
-                    ->required()
-                    ->unique(City::class, 'slug', ignoreRecord: true),
+                ->disabled()
+                ->dehydrated()
+                ->required()
+                ->unique(City::class, 'slug', ignoreRecord: true),
 
                 Forms\Components\FileUpload::make('photo')
-                    ->label('Photo')
-                    ->image()
-                    ->directory('uploads/photos')
-                    ->required(),
+                ->label('Photo')
+                ->image()
+                ->directory('uploads/photos')
+                ->required(),
             ]);
     }
 

@@ -25,67 +25,67 @@ class HouseResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
+                ->required()
+                ->maxLength(255),
 
                 Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->maxLength(255),
+                ->required()
+                ->maxLength(255),
                 
                 Forms\Components\FileUpload::make('thumbnail')
-                    ->image()
-                    ->required(),
+                ->image()
+                ->required(),
 
                 Forms\Components\Textarea::make('about')
-                    ->required()
-                    ->cols(10)
-                    ->rows(20),
+                ->required()
+                ->cols(10)
+                ->rows(20),
 
                 Forms\Components\Repeater::make('photos')
-                    ->relationship('photos')
-                    ->schema([
-                        Forms\Components\FileUpload::make('photo') // FIXED
-                        ->required()
-                    ]),
+                ->relationship('photos')
+                ->schema([
+                    Forms\Components\FileUpload::make('photo') // FIXED
+                    ->required()
+                ]),
 
                 Forms\Components\Repeater::make('features')
-                    ->relationship('features')
-                    ->schema([
-                        Forms\Components\TextInput::make('name') // FIXED
-                        ->required()
-                    ]),
+                ->relationship('features')
+                ->schema([
+                    Forms\Components\TextInput::make('name') // FIXED
+                    ->required()
+                ]),
                 
                 Forms\Components\Select::make('city_id')
-                    ->relationship('city', 'name')
-                    ->searchable()
-                    ->preload()
-                    ->required(),
+                ->relationship('city', 'name')
+                ->searchable()
+                ->preload()
+                ->required(),
 
                 Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->minValue(0)
-                    ->prefix('IDR'),
+                ->required()
+                ->numeric()
+                ->minValue(0)
+                ->prefix('IDR'),
                 
                 Forms\Components\TextInput::make('duration')
-                    ->required()
-                    ->numeric()
-                    ->minValue(0)
-                    ->prefix('Days'),
+                ->required()
+                ->numeric()
+                ->minValue(0)
+                ->prefix('Days'),
                 
                 Forms\Components\Select::make('is_available')
-                    ->options([
-                        true => 'Available',
-                        false => 'Not Available'
-                    ])
-                    ->required(),
+                ->options([
+                    true => 'Available',
+                    false => 'Not Available'
+                ])
+                ->required(),
 
                 Forms\Components\Select::make('is_fully_booked')
-                    ->options([
-                        true => 'Fully Booked', // FIXED
-                        false => 'Not Fully Booked'
-                    ])
-                    ->required(),
+                ->options([
+                    true => 'Fully Booked', // FIXED
+                    false => 'Not Fully Booked'
+                ])
+                ->required(),
             ]);
     }
 
