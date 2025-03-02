@@ -58,7 +58,7 @@ php artisan migrate
 ```
 
 7. Storage Link
-Jika aplikasi menggunakan fitur upload file, jalankan:
+Karena aplikasi menggunakan fitur upload file, jalankan:
 ```
 php artisan storage:link
 ```
